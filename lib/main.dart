@@ -5,16 +5,20 @@ import 'package:flutter_app/screens/wrapper.dart';
 import 'package:flutter_app/services/auth.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final AuthService _auth = AuthService();
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Firebase.initializeApp(),
+      future: Future.delayed(Duration(seconds: 1), () {}),
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return StreamProvider<User>.value(
-            value: AuthService().user,
+            value: _auth.user,
             child: MaterialApp(
               home: FirebaseWrapper(),
             ),
@@ -42,12 +46,4 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-  // Widget build(BuildContext context) {
-  //   return StreamProvider<User>.value(
-  //     value: AuthService().user,
-  //     child: MaterialApp(
-  //       home: FirebaseWrapper(),
-  //     ),
-  //   );
-  // }
 }

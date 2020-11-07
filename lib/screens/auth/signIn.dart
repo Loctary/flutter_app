@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/services/auth.dart';
+import 'package:flutter_app/widgets/asyncRaisedButton.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -30,9 +31,9 @@ class _SignInState extends State<SignIn> {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-        child: RaisedButton(
+        child: AsyncRaisedButton(
           onPressed: _auth.signInAnonymously,
-          child: Text('Sign In Anonomysly'),
+          text: Text('Sign In Anonomysly'),
         ),
       ),
     );

@@ -22,7 +22,6 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      // child: Text('home'),
     );
   }
 }
